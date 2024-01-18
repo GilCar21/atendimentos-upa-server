@@ -1,0 +1,21 @@
+{
+  "name": "agenda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gil",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "devDependencies": {
+    "prisma": "^5.6.0",
+    "tsx": "^4.6.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.6.0",
+    "@types/node": "^20.11.5",
+    "fastify": "^4.24.3",
+    "ts-node": "^10.9.2"
+  }
+}
