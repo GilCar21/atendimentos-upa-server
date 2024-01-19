@@ -19,8 +19,8 @@ export default class ProducaoUseCase {
         return data
     }
 
-    async createAtendimento({quantidade, type, producaoDiaId}: CreateAtendimentoInterface): Promise<AtendimentoInterface>{
-        const data = await this.producaoRepository.createAtendimento({quantidade, type, producaoDiaId})
+    async createAtendimento({quantidade, tipoAtendimento, producaoDiaId}: CreateAtendimentoInterface): Promise<AtendimentoInterface>{
+        const data = await this.producaoRepository.createAtendimento({quantidade, tipoAtendimento, producaoDiaId})
 
         return data
     }

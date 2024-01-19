@@ -32,10 +32,16 @@ model ProducaoDia {
 }
 
 model Atendimentos {
-  id         Int    @id @default(autoincrement())
+  id         Int @id @default(autoincrement())
   quantidade Int
-  type       String
 
-  ProducaoDia   ProducaoDia? @relation(fields: [producaoDiaId], references: [id])
-  producaoDiaId Int?
+  ProducaoDia     ProducaoDia?     @relation(fields: [producaoDiaId], references: [id])
+  producaoDiaId   Int?
+  TipoAtendimento TipoAtendimento? @relation(fields: [tipoAtendimento], references: [type])
+  tipoAtendimento String?
+}
+
+model TipoAtendimento {
+  type         String         @id
+  atendimentos Atendimentos[]
 }

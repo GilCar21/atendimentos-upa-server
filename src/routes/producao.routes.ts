@@ -33,10 +33,10 @@ export async function producaoRoutes(fastify: FastifyInstance){
     })
 
     fastify.post<{Body: CreateAtendimentoInterface}>('/mes/dia/atendimento',async (req, reply)=>{
-        const { quantidade, type, producaoDiaId } = req.body
+        const { quantidade, tipoAtendimento, producaoDiaId } = req.body
         try{
             const data = await producaoUseCase.createAtendimento({
-                quantidade, type, producaoDiaId
+                quantidade, tipoAtendimento, producaoDiaId
             })
             reply.send(data);
         }catch(err){

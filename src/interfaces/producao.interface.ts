@@ -1,13 +1,18 @@
 export interface AtendimentoInterface { 
   id: number;
-  type: string;
+  tipoAtendimento: string | null;
   quantidade: number;
   producaoDiaId: number | null;
 }
 export interface CreateAtendimentoInterface { 
-  type: string;
+  tipoAtendimento: string;
   quantidade: number;
   producaoDiaId: number | null;
+}
+
+export interface TipoAtendimentoInterface {
+  type: string;
+  atendimentos?: AtendimentoInterface[]
 }
 
 
@@ -36,5 +41,6 @@ export interface CreateProducaoMesInterface{
 export interface ProducaoRepository{
   createMes(data: CreateProducaoMesInterface): Promise<ProducaoMesInterface>
   createDia(data: CreateProducaoDiaInterface): Promise<ProducaoDiaInterface>
+  createTipoAtendimento(data: TipoAtendimentoInterface): Promise<TipoAtendimentoInterface>
   createAtendimento(data: CreateAtendimentoInterface): Promise<AtendimentoInterface>
 }

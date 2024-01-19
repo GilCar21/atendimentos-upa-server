@@ -1,5 +1,5 @@
 import { prisma } from "../database/prisma-client";
-import {  AtendimentoInterface, CreateAtendimentoInterface, CreateProducaoDiaInterface, CreateProducaoMesInterface, ProducaoDiaInterface, ProducaoMesInterface, ProducaoRepository } from "../interfaces/producao.interface";
+import {  AtendimentoInterface, CreateAtendimentoInterface, CreateProducaoDiaInterface, CreateProducaoMesInterface, ProducaoDiaInterface, ProducaoMesInterface, ProducaoRepository, TipoAtendimentoInterface } from "../interfaces/producao.interface";
 
 class ProducaoRepositoryPrisma implements ProducaoRepository{
   
@@ -22,11 +22,21 @@ class ProducaoRepositoryPrisma implements ProducaoRepository{
     return result;
   }
 
+  async createTipoAtendimento(data: TipoAtendimentoInterface): Promise<TipoAtendimentoInterface>{
+    const result = await prisma.tipoAtendimento.create({
+      data: {
+        type: data.type
+      }
+    })
+    return result;
+  }
+
   async createAtendimento(data: CreateAtendimentoInterface): Promise<AtendimentoInterface>{
+
     const result = await prisma.atendimentos.create({
       data:{
         quantidade: data.quantidade,
-        type: data.type,
+        tipoAtendimento: data.tipoAtendimento,
         producaoDiaId: data.producaoDiaId
       }
     })
