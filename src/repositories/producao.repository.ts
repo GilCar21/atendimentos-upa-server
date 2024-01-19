@@ -1,12 +1,33 @@
 import { prisma } from "../database/prisma-client";
-import { ProducaoMesInterface, ProducaoRepository } from "../interfaces/producao.interface";
+import {  AtendimentoInterface, CreateAtendimentoInterface, CreateProducaoDiaInterface, CreateProducaoMesInterface, ProducaoDiaInterface, ProducaoMesInterface, ProducaoRepository } from "../interfaces/producao.interface";
 
 class ProducaoRepositoryPrisma implements ProducaoRepository{
-  async create(data: ProducaoMesInterface): Promise<ProducaoMesInterface> {
+  
+  async createMes(data: CreateProducaoMesInterface): Promise<ProducaoMesInterface> {
     const result = await prisma.producaoMes.create({
       data: {
-        mes: data.mes,
-        producaoDia: data.producaoDia
+       mes: data.mes
+      }
+    })
+    return result;
+  }
+
+  async createDia(data:CreateProducaoDiaInterface): Promise<ProducaoDiaInterface>{
+    const result = await prisma.producaoDia.create({
+      data:{
+        numeroDia: data.numeroDia,
+        producaoMesId: data.producaoMesId
+      }
+    })
+    return result;
+  }
+
+  async createAtendimento(data: CreateAtendimentoInterface): Promise<AtendimentoInterface>{
+    const result = await prisma.atendimentos.create({
+      data:{
+        quantidade: data.quantidade,
+        type: data.type,
+        producaoDiaId: data.producaoDiaId
       }
     })
     return result;
@@ -14,4 +35,4 @@ class ProducaoRepositoryPrisma implements ProducaoRepository{
   
 }
 
-export {ProducaoRepository}
+export {ProducaoRepositoryPrisma}

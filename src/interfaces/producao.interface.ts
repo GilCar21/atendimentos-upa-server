@@ -2,14 +2,25 @@ export interface AtendimentoInterface {
   id: number;
   type: string;
   quantidade: number;
-  producaoDiaId: number;
+  producaoDiaId: number | null;
+}
+export interface CreateAtendimentoInterface { 
+  type: string;
+  quantidade: number;
+  producaoDiaId: number | null;
 }
 
+
 export interface ProducaoDiaInterface {
-  id?: number;
+  id: number;
   numeroDia: number;
-  atendimentos: AtendimentoInterface[];
-  producaoMesId: number;
+  producaoMesId: number | null;
+  atendimentos?: AtendimentoInterface[];
+}
+export interface CreateProducaoDiaInterface {
+  numeroDia: number;
+  producaoMesId: number | null;
+  atendimentos?: AtendimentoInterface[];
 }
 
 export interface ProducaoMesInterface{
@@ -17,6 +28,13 @@ export interface ProducaoMesInterface{
   mes: string;
   producaoDia?: ProducaoDiaInterface[]
 }
-export interface ProducaoRepository{
+export interface CreateProducaoMesInterface{
+  mes: string;
+  producaoDia?: ProducaoDiaInterface[]
+}
 
+export interface ProducaoRepository{
+  createMes(data: CreateProducaoMesInterface): Promise<ProducaoMesInterface>
+  createDia(data: CreateProducaoDiaInterface): Promise<ProducaoDiaInterface>
+  createAtendimento(data: CreateAtendimentoInterface): Promise<AtendimentoInterface>
 }
